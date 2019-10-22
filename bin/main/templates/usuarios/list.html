@@ -1,0 +1,39 @@
+<!doctype html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Usuários</title>
+	<meta charset="utf-8">
+</head>
+<body class="container">
+	<h1>Usuários</h1> 
+	
+		<div class="alert alert-success" role="alert">
+		  Usuário criado com sucesso!
+		</div>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">ID</th>
+				<th scope="col">Nome</th>
+				<th scope="col">Sobrenome</th>
+				<th scope="col">#</th>
+			</tr>
+		</thead>
+		<tbody>
+			
+				<tr th:each="usuarios: ${usuarios}"> 
+					<td th:text= "${usuarios.id}"> 
+					<td th:text= "${usuarios.nome}" ></td>
+					<td th:text= "${usuarios.sobrenome}"></td>
+					<td> <a th:href="@{usuarios/edit/{id}(id=${usuarios.id})}" class="btn btn-primary">Editar</a> </td>
+				
+				</tr>
+
+		</tbody>
+	</table>
+	
+	<a href="/usuarios/create" class="btn btn-primary">Criar</a>
+	
+</body>
+</html>

@@ -1,0 +1,27 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<title>Criar usuário</title>
+	</head>
+	<body>
+		<form action="#" th:action="@{/usuarios}" th:object="${usuario}" method="post">
+			<label for="nome" >Nome</label>
+			<input type="text" 
+				th:field="*{nome}"
+				id="nome"
+				placeholder="Seu nome">
+			<span th:if=(${#fields.hasErrors('nome')}) th:errors="*{nome}"> </span>
+		
+			
+			<label for="sobrenome" >Sobrenome</label>
+			<input type="text"
+				th:field="*{sobrenome}"
+				id="sobrenome"
+				placeholder="Seu sobrenome">
+			<span th:if=(${#fields.hasErrors('sobrenome')}) th:errors="*{sobrenome}"> </span>
+			
+			
+			<input type="submit" value="salvar">
+		</form>
+	</body>
+</html>
