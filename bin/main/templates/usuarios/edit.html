@@ -4,25 +4,25 @@
 		<title>Editar usuário</title>
 	</head>
 	<body>
-		<form action="#" th:action="@{/usuarios}" th:object="${usuario}" method="post">
+		<form action="#" th:action="@{/edit}" th:object="${usuario}" method="post">
 			<label for="id" >ID</label>
 			<input type="text" 
 				th:field="*{id}"
-				id="id" readonly=“true”>
+				id="id" readonly=“true”  >
 				
 			<span th:if=(${#fields.hasErrors('id')}) th:errors="*{id}"> </span>
 	
 			<label for="nome" >Nome</label>
 			<input type="text" 
 				th:field="*{nome}"
-				id="nome">
+				id="nome" required>
 			<span th:if=(${#fields.hasErrors('nome')}) th:errors="*{nome}"> </span>
 		
 			
 			<label for="sobrenome" >Sobrenome</label>
 			<input type="text"
 				th:field="*{sobrenome}"
-				id="sobrenome">
+				id="sobrenome" required>
 			<span th:if=(${#fields.hasErrors('sobrenome')}) th:errors="*{sobrenome}"> </span>
 			
 			

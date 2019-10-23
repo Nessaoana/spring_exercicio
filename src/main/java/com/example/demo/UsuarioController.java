@@ -55,18 +55,30 @@ public class UsuarioController {
 	}
 
 	
+	@PostMapping("/edit")
+	public String edit(@Valid Usuario usuario, BindingResult result , Model model ) {
+//		if(result.hasErrors()) {
+//				model.addAttribute("usuario", usuario.getId());
+//				return "usuarios/edit" ; 
+//		}				
+		repository.save(usuario);
+		// usuario.salvar();
+		
+		model.addAttribute("usuarios", repository.findAll());
+		
+		return "usuarios/list";
+	}
 	
 	@GetMapping("/usuarios/edit/{id}")
 	public ModelAndView edit(@PathVariable(name="id") long id ) {
+		
 		ModelAndView mav = new ModelAndView("usuarios/edit");
 		
-		Optional<Usuario> usuario = repository.findById(id);
-		mav.addObject("usuario", usuario);
+			Optional<Usuario> usuario = repository.findById(id);
+			mav.addObject("usuario", usuario);
+		
+		
 		
 		return mav;
 	}
-//	MerchandiseEntity pantsInDB = repo.findById(pantsId).get(); 
-//	pantsInDB.setPrice(44.99); 
-//	repo.save(pantsInDB);
-//	<td> <a th:href="@{usuarios/edit/{id}(id=${usuarios.id})}" class="btn btn-primary">Editar</a> </td>
 }
