@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.entidades.ResourceNotFoundException;
 import com.example.demo.entidades.Usuario;
 import com.example.demo.entidades.UsuariosRepository;
 
@@ -55,14 +56,12 @@ public class UsuarioController {
 	}
 
 	
-	@PostMapping("/edit")
-	public String edit(@Valid Usuario usuario, BindingResult result , Model model ) {
-//		if(result.hasErrors()) {
-//				model.addAttribute("usuario", usuario.getId());
-//				return "usuarios/edit" ; 
-//		}				
+	@PostMapping("usuarios/{id}")
+	public String edit(@PathVariable(name="id") long id, @Valid Usuario usuario, BindingResult result , Model model ) {
+		if(result.hasErrors()) {
+				return "usuarios/edit"; 
+		}				
 		repository.save(usuario);
-		// usuario.salvar();
 		
 		model.addAttribute("usuarios", repository.findAll());
 		
@@ -70,15 +69,16 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("/usuarios/edit/{id}")
-	public ModelAndView edit(@PathVariable(name="id") long id ) {
-		
-		ModelAndView mav = new ModelAndView("usuarios/edit");
-		
-			Optional<Usuario> usuario = repository.findById(id);
-			mav.addObject("usuario", usuario);
+	public String edit(@PathVariable(name="id") long id, Model model ) {
 		
 		
+			Usuario usuario = repository
+					.findById(id)
+					.orElseThrow( () -> new ResourceNotFoundException("Usuário não encontrado"));
+
+		model.addAttribute("usuario", usuario);
 		
-		return mav;
+		
+		return "usuarios/edit";
 	}
 }
