@@ -81,4 +81,17 @@ public class UsuarioController {
 		
 		return "usuarios/edit";
 	}
+	
+	
+	@GetMapping("/usuarios/delete/{id}")
+	public String delete(@PathVariable long id, Model model ) {
+		
+		repository.deleteById(id);
+		
+		model.addAttribute("usuarios", repository.findAll());
+			
+		return "usuarios/list";
+
+	}
+	
 }

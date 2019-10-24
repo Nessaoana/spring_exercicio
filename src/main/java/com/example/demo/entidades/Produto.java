@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 
 
@@ -21,7 +22,7 @@ public class Produto {
 	
 	private String descricao;
 	
-	@NotNull (message = "O preço é obrigatório!")
+	@Positive (message = "O preço é obrigatório!")
 	private float preco;
 	
 	
