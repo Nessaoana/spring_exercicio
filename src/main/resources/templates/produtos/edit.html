@@ -1,0 +1,42 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8">
+		<title>Editar produto</title>
+	</head>
+	<body>
+		<form action="#" th:action="@{/produtos/{id}(id= ${produto.id})}" th:object="${produto}" method="post">
+			<label for="id" >ID</label>
+			<input type="text" 
+				th:field="*{id}"
+				id="id" readonly=“true”  >
+				
+			<span th:if=(${#fields.hasErrors('id')}) th:errors="*{id}"> </span>
+	
+			<label for="nome" >Nome</label>
+			<input type="text" 
+				th:field="*{nome}"
+				id="nome"
+				placeholder="Nome">
+			<span th:if=(${#fields.hasErrors('nome')}) th:errors="*{nome}"> </span>
+		
+			
+			<label for="descricao" >Descrição</label>
+			<input type="text"
+				th:field="*{descricao}"
+				id="descricao"
+				placeholder="Descrição do produto">
+			<span th:if=(${#fields.hasErrors('descricao')}) th:errors="*{descricao}"> </span>
+			
+			
+			<label for="preco" >Preço</label>
+			<input type="number"
+				th:field="*{preco}"
+				id="preco"
+				placeholder="Preço do produto">
+			<span th:if=(${#fields.hasErrors('preco')}) th:errors="*{preco}"> </span>
+			
+			
+			<input type="submit" value="salvar">
+		</form>
+	</body>
+</html>
